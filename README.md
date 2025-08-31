@@ -2,7 +2,7 @@
 
 A comprehensive IT helpdesk automation system that streamlines support through a chatbot interface and automated workflows. The system uses natural language processing to categorize and prioritize IT requests, integrates with ticketing systems, and provides automated solutions for routine tasks.
 
-## Features
+## Features 
 
 ###  Intelligent Chatbot
 - Natural language processing for request categorization
