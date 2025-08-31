@@ -1,13 +1,58 @@
 const express = require('express');
 const router = express.Router();
-const Ticket = require('../models/Ticket');
+
+// Mock data for demo mode
+const mockAnalytics = {
+  totalTickets: 45,
+  ticketsByStatus: {
+    open: 12,
+    in_progress: 8,
+    resolved: 20,
+    closed: 5
+  },
+  ticketsByCategory: {
+    password_reset: 15,
+    software_issue: 12,
+    hardware_issue: 8,
+    network_issue: 6,
+    account_provisioning: 4
+  },
+  ticketsByPriority: {
+    low: 18,
+    medium: 20,
+    high: 5,
+    critical: 2
+  },
+  avgResolutionTimeHours: 4,
+  automationRate: 65,
+  dailyTrend: [
+    { date: '2023-12-01', count: 5 },
+    { date: '2023-12-02', count: 8 },
+    { date: '2023-12-03', count: 6 },
+    { date: '2023-12-04', count: 10 },
+    { date: '2023-12-05', count: 7 },
+    { date: '2023-12-06', count: 9 },
+    { date: '2023-12-07', count: 12 }
+  ]
+};
 
 // Get dashboard analytics
 router.get('/dashboard', async (req, res) => {
   try {
+    const isDemoMode = req.app.get('demoMode');
+    
+    if (isDemoMode) {
+      // Return mock data for demo
+      res.json(mockAnalytics);
+      return;
+    }
+
+    // Real database logic would go here
     const { timeframe = '30' } = req.query; // days
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - parseInt(timeframe));
+    
+    const Ticket = require('../models/Ticket');
     
     // Total tickets
     const totalTickets = await Ticket.countDocuments({
@@ -91,6 +136,7 @@ router.get('/dashboard', async (req, res) => {
       }))
     });
   } catch (error) {
+    console.error('Analytics error:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -119,9 +165,22 @@ router.get('/satisfaction', async (req, res) => {
 // Get performance metrics
 router.get('/performance', async (req, res) => {
   try {
+    const isDemoMode = req.app.get('demoMode');
+    
+    if (isDemoMode) {
+      res.json({
+        avgFirstResponseTimeHours: 2,
+        ticketsResolved: 20,
+        ticketsEscalated: 3
+      });
+      return;
+    }
+    
     const { timeframe = '30' } = req.query;
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - parseInt(timeframe));
+    
+    const Ticket = require('../models/Ticket');
     
     // First response time
     const tickets = await Ticket.find({

@@ -27,17 +27,23 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/it-helpdesk', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Database connection with graceful fallback
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/it-helpdesk', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+    });
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.log('MongoDB connection failed, running in demo mode:', error.message);
+    // In demo mode, we'll use mock data
+    app.set('demoMode', true);
+  }
+};
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
+connectDB();
 
 // Routes
 app.use('/api/tickets', ticketRoutes);
