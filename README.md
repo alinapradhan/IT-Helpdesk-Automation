@@ -4,31 +4,31 @@ A comprehensive IT helpdesk automation system that streamlines support through a
 
 ## Features
 
-### 🤖 Intelligent Chatbot
+###  Intelligent Chatbot
 - Natural language processing for request categorization
 - Context-aware responses and suggestions
 - Knowledge base integration for instant solutions
 - Automated ticket creation for complex issues
 
-### 🎫 Ticket Management
+###  Ticket Management
 - Automated ticket creation and categorization
 - Priority assignment based on request analysis
 - Real-time status updates and notifications
 - Integration with external ticketing systems (ServiceNow, Jira, Zendesk)
 
-### 🔄 Workflow Automation
+###  Workflow Automation
 - Automated password resets
 - Account provisioning workflows
 - Routine task handling
 - Escalation to human agents for complex issues
 
-### 📊 Analytics Dashboard
+###  Analytics Dashboard
 - Real-time metrics and KPIs
 - Response time tracking
 - Automation rate monitoring
 - Satisfaction surveys and reporting
 
-### 📚 Knowledge Base
+###  Knowledge Base
 - Searchable article repository
 - Category-based organization
 - User rating system
@@ -184,9 +184,6 @@ docker-compose up -d
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Support
 
