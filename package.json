@@ -1,0 +1,35 @@
+{
+  "name": "it-helpdesk-automation",
+  "version": "1.0.0",
+  "description": "IT Helpdesk Automation system with chatbot and workflow automation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon backend/server.js",
+    "client": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "install-deps": "npm install && cd frontend && npm install",
+    "seed": "node backend/seed.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": ["helpdesk", "automation", "chatbot", "IT", "support"],
+  "author": "IT Helpdesk Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "mongoose": "^7.5.0",
+    "dotenv": "^16.3.1",
+    "socket.io": "^4.7.2",
+    "axios": "^1.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "openai": "^4.0.0",
+    "node-cron": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "concurrently": "^8.2.0"
+  }
+}
